@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Georgian Bank Currency Exchange{% endblock %}</title>
+</head>
+{% block content %}
+<body>
+<h1 style="text-align: left;color: orange;margin-top: 20px; margin-left: 70px;">Georgian Bank</h1>
+<div style="text-align: left;color: red;font-size: 25px;margin-top: 30px;margin-left: 120px;">
+    <p><strong>Sell USD: {{ info.georgian_bank_sell_USD }}</strong></p>
+    <p><strong>Buy USD: {{ info.georgian_bank_buy_USD }}</strong></p>
+
+</div>
+<form action="{% url 'georgian bank page' %}" method="post">
+    {% csrf_token %}
+  <div  style="margin-top: 50px;" class="form-group">
+    <input style="text-align: center" type="text" name="valute" class="form-control" id="formGroupExampleInput" placeholder="Convert USD to GEL & GEL to USD" required>
+      <input  class="btn btn-primary" type="submit" value="Check GEL & USD">
+  </div>
+    <div style='text-align: center;margin-top: 40px;'>
+        <p style="text-align: center;color: white;font-size: 25px;"><strong>{{ info.result_GEL }}</strong></p>
+        <p style="text-align: center;color: white;font-size: 25px;"><strong>{{ info.result_USD }}</strong></p>
+    </div>
+</form>
+</body>
+</html>
+{% endblock %}
