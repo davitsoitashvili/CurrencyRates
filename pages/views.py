@@ -15,17 +15,20 @@ def Georgian_Bank_View(request):
     info['georgian_bank_sell_USD'] = float(find_currency[12].get_text()[22:])
     info['georgian_bank_buy_USD'] = float(find_currency[13].get_text()[22:])
     if request.POST:
-        valute = request.POST['valute']
+        try:
+            valute = request.POST['valute']
 
 
-        info['USD'] = valute
-        info['result_valute_georgian_bank_gel'] = float(valute) * float(info['georgian_bank_sell_USD'])
-        info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_georgian_bank_gel'])
+            info['USD'] = valute
+            info['result_valute_georgian_bank_gel'] = float(valute) * float(info['georgian_bank_sell_USD'])
+            info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_georgian_bank_gel'])
 
-        info['GEL'] = valute
-        info['result_valute_georgian_bank_usd'] = float(valute) / float(info['georgian_bank_buy_USD'])
-        info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_georgian_bank_usd'])
+            info['GEL'] = valute
+            info['result_valute_georgian_bank_usd'] = float(valute) / float(info['georgian_bank_buy_USD'])
+            info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_georgian_bank_usd'])
 
+        except:
+            info['result_USD'] = "Write The Number !"
 
     return render(request, 'georgian_bank.html', {'info':info})
 
@@ -41,17 +44,17 @@ def TBC_Bank_View(request):
     info['tbc_bank_buy_USD'] = USD_GEL[1]
 
     if request.POST:
-        valute = request.POST['valute']
+        try:
+            valute = request.POST['valute']
+            info['USD'] = valute
+            info['result_valute_tbc_bank_gel'] = float(valute) * float(info['tbc_bank_sell_USD'])
+            info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
 
-
-        info['USD'] = valute
-        info['result_valute_tbc_bank_gel'] = float(valute) * float(info['tbc_bank_sell_USD'])
-        info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
-
-        info['GEL'] = valute
-        info['result_valute_tbc_bank_usd'] = float(valute) / float(info['tbc_bank_buy_USD'])
-        info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_tbc_bank_usd'])
-
+            info['GEL'] = valute
+            info['result_valute_tbc_bank_usd'] = float(valute) / float(info['tbc_bank_buy_USD'])
+            info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_tbc_bank_usd'])
+        except:
+            info['result_USD'] = "Write The Number !"
     return render(request, 'tbc_bank.html', {'info':info})
 
 def Procredit_Bank_View(request):
@@ -63,14 +66,16 @@ def Procredit_Bank_View(request):
     info['procredit_bank_buy_USD'] = float(soup_procredit_bank.find_all('div', class_='exchange-sell')[0].get_text()[37:])
 
     if request.POST:
-        valute = request.POST['valute']
+        try:
+            valute = request.POST['valute']
 
-        info['USD'] = valute
-        info['result_valute_tbc_bank_gel'] = float(valute) * float(info['procredit_bank_sell_USD'])
-        info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
+            info['USD'] = valute
+            info['result_valute_tbc_bank_gel'] = float(valute) * float(info['procredit_bank_sell_USD'])
+            info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
 
-        info['GEL'] = valute
-        info['result_valute_procredit_bank_usd'] = float(valute) / float(info['procredit_bank_buy_USD'])
-        info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_procredit_bank_usd'])
-
+            info['GEL'] = valute
+            info['result_valute_procredit_bank_usd'] = float(valute) / float(info['procredit_bank_buy_USD'])
+            info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_procredit_bank_usd'])
+        except:
+            info['result_USD'] = "Write The Number !"
     return render(request, 'procredit_bank.html', {'info':info})
