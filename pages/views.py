@@ -48,7 +48,7 @@ def TBC_Bank_View(request):
     if request.POST:
         try:
             valute = request.POST['valute']
-            
+
             info['USD'] = valute
             info['result_valute_tbc_bank_gel'] = float(valute) * float(info['tbc_bank_sell_USD'])
             info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
@@ -58,6 +58,7 @@ def TBC_Bank_View(request):
             info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_tbc_bank_usd'])
         except:
             info['result_USD'] = "Write The Number !"
+            
     return render(request, 'tbc_bank.html', {'info':info})
 
 def Procredit_Bank_View(request):
@@ -81,4 +82,5 @@ def Procredit_Bank_View(request):
             info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_procredit_bank_usd'])
         except:
             info['result_USD'] = "Write The Number !"
+
     return render(request, 'procredit_bank.html', {'info':info})
