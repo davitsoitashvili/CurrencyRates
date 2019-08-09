@@ -21,7 +21,6 @@ def Georgian_Bank_View(request):
         try:
             valute = request.POST['valute']
 
-
             info['USD'] = valute
             info['result_valute_georgian_bank_gel'] = float(valute) * float(info['georgian_bank_sell_USD'])
             info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_georgian_bank_gel'])
@@ -49,6 +48,7 @@ def TBC_Bank_View(request):
     if request.POST:
         try:
             valute = request.POST['valute']
+            
             info['USD'] = valute
             info['result_valute_tbc_bank_gel'] = float(valute) * float(info['tbc_bank_sell_USD'])
             info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_tbc_bank_gel'])
