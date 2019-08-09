@@ -1,30 +1,21 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
-import pyttsx3
+
 
 def Index_View(request):
 
     return render(request,'index.html', {})
 
+
 def Georgian_Bank_View(request):
     url_georgian_bank = requests.get('https://bankofgeorgia.ge/en/services/treasury-operations/exchange-rates')
     soup_georgian_bank = BeautifulSoup(url_georgian_bank.content, 'html.parser')
     find_currency = soup_georgian_bank.find_all('td', class_="")
-    georgian_bank_sell_USD = f'Sell USD = {float(find_currency[12].get_text()[22:])},'
-    georgian_bank_buy_USD = f'Buy USD = {float(find_currency[13].get_text()[22:])},'
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 110)
-    engine.say("Georgian Bank")
-    engine.say(georgian_bank_sell_USD)
-    engine.say(georgian_bank_buy_USD)
-    engine.runAndWait()
 
     info = {}
     info['georgian_bank_sell_USD'] = float(find_currency[12].get_text()[22:])
     info['georgian_bank_buy_USD'] = float(find_currency[13].get_text()[22:])
-
-    engine.runAndWait()
 
     if request.POST:
         try:
@@ -38,7 +29,6 @@ def Georgian_Bank_View(request):
             info['GEL'] = valute
             info['result_valute_georgian_bank_usd'] = float(valute) / float(info['georgian_bank_buy_USD'])
             info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_georgian_bank_usd'])
-
 
         except:
             info['result_USD'] = "Write The Number !"
