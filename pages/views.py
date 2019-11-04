@@ -8,31 +8,36 @@ def Index_View(request):
     return render(request,'index.html', {})
 
 
-def Georgian_Bank_View(request):
-    url_georgian_bank = requests.get('https://bankofgeorgia.ge/en/services/treasury-operations/exchange-rates')
-    soup_georgian_bank = BeautifulSoup(url_georgian_bank.content, 'html.parser')
-    find_currency = soup_georgian_bank.find_all('td', class_="")
-
+def VTB_Bank_View(request):
+    url = requests.get("https://vtb.ge/en/individuals/exchange-rates")
+    soup = BeautifulSoup(url.content, "html.parser")
+    USD = soup.find_all("tr")[1]
     info = {}
-    info['georgian_bank_sell_USD'] = float(find_currency[12].get_text()[22:])
-    info['georgian_bank_buy_USD'] = float(find_currency[13].get_text()[22:])
+    Price_result = []
+    for item in USD:
+        for result in item:
+            if result.isdigit:
+                Price_result.append(result)
+
+
+    info["VTB_bank_buy_USD"] = BuyUSD = Price_result[-2]
+    info["VTB_bank_sell_USD"] = BuyUSD =  SellUSD = Price_result[-4]
 
     if request.POST:
         try:
             valute = request.POST['valute']
 
             info['USD'] = valute
-            info['result_valute_georgian_bank_gel'] = float(valute) * float(info['georgian_bank_sell_USD'])
-            info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_georgian_bank_gel'])
+            info['result_valute_vtb_bank_gel'] = float(valute) * float(info['VTB_bank_sell_USD'])
+            info['result_GEL'] = "{}USD = {}GEL".format(info['USD'],info['result_valute_vtb_bank_gel'])
 
             info['GEL'] = valute
-            info['result_valute_georgian_bank_usd'] = float(valute) / float(info['georgian_bank_buy_USD'])
-            info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_georgian_bank_usd'])
-
+            info['result_valute_vtb_bank_usd'] = float(valute) / float(info['VTB_bank_buy_USD'])
+            info['result_USD'] = "{}GEL = {}USD".format(info['GEL'], info['result_valute_vtb_bank_usd'])
         except:
             info['result_USD'] = "Write The Number !"
 
-    return render(request, 'georgian_bank.html', {'info':info})
+    return render(request, 'VTB_bank.html', {'info':info})
 
 def TBC_Bank_View(request):
     url = requests.get('http://www.tbcbank.ge/web/en/exchange-rates')

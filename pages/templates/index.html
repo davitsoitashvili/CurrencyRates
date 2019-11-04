@@ -13,24 +13,20 @@
   </head>
 
   <body style="background-image: url('{% static 'static/images/background.jpg' %}')";>
-  <ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-      <a style="background-color: gray;font-size: 30px;color: white" class="nav-link active" href="{% url 'index page' %}"><strong>Currency Exchange Rates</strong></a>
-  </li>
-  <li class="nav-item">
-      <a style="font-size: 25px;color:orange;" class="nav-link" href="{% url 'georgian bank page' %}"><em><b>Georgian Bank</b></em></a>
-  </li>
-  <li class="nav-item">
-      <a style="font-size: 25px;color: blue" class="nav-link" href="{% url 'tbc bank page' %}"><em><b>TBC Bank</b></em></a>
-  </li>
-      <li class="nav-item">
-          <a style="font-size: 25px; color: red" class="nav-link" href="{% url 'procredit bank page' %}"><em><b>Procredit Bank</b></em></a>
-  </li>
-</ul>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <div style="text-align: center;">
+
+  <a style="font-size: 40px;color:darkblue;border: solid darkblue 5px;margin-top: 5px;background-color: white" class="nav-link" href="{% url 'VTB bank page' %}"><em><b>VTB Bank</b></em></a>
+  <a style="font-size: 40px;color: blue;border: solid blue 5px;margin-top: 5px;background-color: white" class="nav-link" href="{% url 'tbc bank page' %}"><em><b>TBC Bank</b></em></a>
+  <a style="font-size: 40px; color: red;border: solid red 5px;margin-top: 5px;background-color: white" class="nav-link" href="{% url 'procredit bank page' %}"><em><b>Procredit Bank</b></em></a>
+
+  </div>
   {% block content %}
     {% endblock %}
+
   </body>
 </html>

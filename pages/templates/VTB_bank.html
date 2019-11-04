@@ -3,26 +3,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Georgian Bank Currency Exchange{% endblock %}</title>
+    <title>{% block title %}VTB Bank Currency Exchange{% endblock %}</title>
 </head>
 {% block content %}
 <body>
-<h1 style="text-align: center;color: orange;margin-top: 20px;">Georgian Bank</h1>
+<h1 style="text-align: center;color: darkblue;margin-top: 20px;">VTB Bank</h1>
 <div style="text-align: center;color: red;font-size: 30px;margin-top: 20px;">
 
-    <p><i><mark><b>Sell USD: {{ info.georgian_bank_sell_USD }}</b></mark></i></p>
-    <p><i><mark><b>Buy USD: {{ info.georgian_bank_buy_USD }}</b></mark></i></p>
+    <p><i><mark><b>Sell USD: {{ info.VTB_bank_sell_USD }}</b></mark></i></p>
+    <p><i><mark><b>Buy USD: {{ info.VTB_bank_buy_USD }}</b></mark></i></p>
 
 </div>
-<form action="{% url 'georgian bank page' %}" method="post">
+<form action="{% url 'VTB bank page' %}" method="post">
     {% csrf_token %}
   <div  style="margin-top: 50px;" class="form-group">
     <input style="text-align: center" type="text" name="valute" class="form-control" id="formGroupExampleInput" placeholder="Convert USD to GEL & GEL to USD" required>
       <input  class="btn btn-primary" type="submit" value="Check GEL & USD">
   </div>
     <div style='text-align: center;margin-top: 40px;'>
-        <p style="text-align: center;color: white;font-size: 25px;"><strong>{{ info.result_GEL }}</strong></p>
-        <p style="text-align: center;color: white;font-size: 25px;"><strong>{{ info.result_USD }}</strong></p>
+        <p style="text-align: center;color: red;font-size: 25px;background-color: white"><strong>{{ info.result_GEL }}</strong></p>
+        <p style="text-align: center;color: red;font-size: 25px;background-color: white"><strong>{{ info.result_USD }}</strong></p>
     </div>
 </form>
 </body>
